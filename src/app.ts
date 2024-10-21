@@ -1,6 +1,6 @@
-import express from 'express';
-import { apiController } from './controllers/apiController';
-import { rateLimiter } from './middleware/rateLimiter';
+import express from "express";
+import { apiController } from "./controllers/apiController";
+import { rateLimiter } from "./middleware/rateLimiter";
 
 const app = express();
 
@@ -8,15 +8,22 @@ const app = express();
 app.use(express.json());
 
 // Rate limiter middleware applied to all routes
-app.use(rateLimiter);
+// app.use(rateLimiter);
 
 // API routes
-app.get('/data', apiController.getData);
+app.get("/data", apiController.getData);
 
 // Error handling middleware
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use(
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
     console.error(err.stack);
-    res.status(500).json({ message: 'Something went wrong!' });
-});
+    res.status(500).json({ message: "Something went wrong!" });
+  }
+);
 
 export default app;
