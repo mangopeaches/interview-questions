@@ -1,6 +1,6 @@
 import express from "express";
 import { apiController } from "./controllers/apiController";
-import { rateLimiter } from "./middleware/rateLimiter";
+import rateLimiter from "./middleware/rateLimiter";
 
 const app = express();
 
@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 // Rate limiter middleware applied to all routes
-// app.use(rateLimiter);
+app.use(rateLimiter);
 
 // API routes
 app.get("/data", apiController.getData);
